@@ -1,0 +1,14 @@
+URxvt.foreground:       rgb:bb/bb/bb
+URxvt.background:       rgb:00/00/00
+URxvt.saveLines:        8192
+URxvt.scrollstyle:      plain
+URxvt.font: xft:Terminus:pixelsize=10
+!URxvt*termName: rxvt
+URxvt.urlLauncher:      firefox
+URxvt.scrollTtyKeypress:true
+URxvt.scrollTtyOutput:  false
+URxvt.scrollWithBuffer: true
+URxvt.perl-ext-common:  default,matcher
+URxvt.matcher.button:   1
+URxvt.secondaryScroll:  true
+

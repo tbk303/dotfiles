@@ -1,0 +1,14 @@
+[user]
+	email = tbh@holumbus.org
+	name = Timo B. Hübel
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 0x0+0+0
+	file-view-vpane-position = 654
+	file-view-hpane-position = 281
+	main-window-view = FileView
+	history-view-vpane-position = 564
