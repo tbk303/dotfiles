@@ -13,3 +13,6 @@ set softtabstop=4
 " Use tabs at the start of a line, spaces elsewhere
 set smarttab
 
+" Show line numbers.
+set number
+
