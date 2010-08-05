@@ -207,14 +207,14 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 defaultTiled = Tall 1 (3/100) (11/16)
 
-myLayout = onWorkspace "cod" (Full ||| defaultTiled)
-         $ onWorkspace "scm" (Tall 1 (3/100) (9/16))
-	 $ onWorkspace "app" (Tall 1 (3/100) (10/16))
-         $ onWorkspace "web" (defaultTiled ||| Full)
-	 $ onWorkspace "irc" (Tall 1 (3/100) (13/16) ||| Mirror defaultTiled)
-	 $ onWorkspace "msg" (Tall 1 (3/100) (7/16))
-         $ onWorkspace "con" (ThreeColMid 1 (3/100) (4/9) ||| ThreeCol 1 (3/100) (4/9))
-	 $ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
+myLayout = onWorkspace "cod" (Tall 1 (3/100) (1/2) ||| Full)
+	$ onWorkspace "scm" (Tall 1 (3/100) (9/16))
+	$ onWorkspace "app" (Tall 1 (3/100) (10/16))
+	$ onWorkspace "web" (defaultTiled ||| Full)
+	$ onWorkspace "irc" (Tall 1 (3/100) (13/16) ||| Mirror defaultTiled)
+	$ onWorkspace "msg" (Tall 1 (3/100) (7/16))
+	$ onWorkspace "con" (ThreeColMid 1 (3/100) (3/9) ||| ThreeCol 1 (3/100) (4/9))
+	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
 -- Window rules:
