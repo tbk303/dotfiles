@@ -16,3 +16,10 @@ set smarttab
 " Show line numbers.
 set number
 
+" Proper autocomplete when opening files
+set wildmode=longest,list,full
+set wildmenu
+
+" Tabbing
+map <F7> :tabp<CR>
+map <F8> :tabn<CR>
