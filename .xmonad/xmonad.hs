@@ -213,7 +213,7 @@ myLayout = onWorkspace "cod" (Tall 1 (3/100) (1/2) ||| Full)
 	$ onWorkspace "web" (defaultTiled ||| Full)
 	$ onWorkspace "irc" (Tall 1 (3/100) (13/16) ||| Mirror defaultTiled)
 	$ onWorkspace "msg" (Tall 1 (3/100) (7/16))
-	$ onWorkspace "con" (ThreeColMid 1 (3/100) (3/9) ||| ThreeCol 1 (3/100) (4/9))
+	$ onWorkspace "con" (ThreeColMid 1 (3/100) (4/9) ||| ThreeCol 1 (3/100) (4/9))
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
