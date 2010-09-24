@@ -30,3 +30,11 @@ map <F8> :tabn<CR>
 
 " Highlight searches
 set hlsearch
+
+" Show some whitespace characters
+set listchars=eol:¶,tab:»-,trail:·,extends:>,precedes:<
+set list
+hi NonText guifg=darkgrey ctermfg=darkgrey
+
+set nowrap
+
