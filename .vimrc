@@ -2,13 +2,17 @@
 " Automatic indenting, on new line.
 set autoindent
 
-" Real tab chars.
-set noexpandtab
+" Use spaces instead of tabs
+set expandtab
+
+" Real tab chars for Haskell files.
+autocmd FileType haskell
+  \ set noexpandtab
 
 " Tab spacing.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 " Use tabs at the start of a line, spaces elsewhere
 set smarttab
@@ -23,3 +27,6 @@ set wildmenu
 " Tabbing
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
+
+" Highlight searches
+set hlsearch
