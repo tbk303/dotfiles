@@ -11,6 +11,7 @@ import XMonad
 import XMonad.Actions.SpawnOn
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.ResizableTile
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
@@ -142,6 +143,9 @@ myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Lock the screen
     , ((modMask .|. shiftMask, xK_z     ), spawn "xscreensaver-command -lock")
+		-- Shrink/Expand window
+    , ((modMask .|. shiftMask, xK_h     ), sendMessage MirrorShrink)
+    , ((modMask .|. shiftMask, xK_l     ), sendMessage MirrorExpand)
     ]
     ++
 
@@ -205,15 +209,15 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 --     -- Percent of screen to increment by when resizing panes
 --     delta   = 3/100
 
-defaultTiled = Tall 1 (3/100) (11/16)
+defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
-myLayout = onWorkspace "cod" (Tall 1 (3/100) (1/2) ||| Full)
-	$ onWorkspace "scm" (Tall 1 (3/100) (9/16))
-	$ onWorkspace "app" (Tall 1 (3/100) (10/16))
+myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Full)
+	$ onWorkspace "scm" (ResizableTall 1 (3/100) (9/16) [])
+	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [])
 	$ onWorkspace "web" (defaultTiled ||| Full)
-	$ onWorkspace "irc" (Tall 1 (3/100) (13/16) ||| Mirror defaultTiled)
-	$ onWorkspace "msg" (Tall 1 (3/100) (7/16))
-	$ onWorkspace "con" (ThreeColMid 1 (3/100) (4/9) ||| ThreeCol 1 (3/100) (4/9))
+	$ onWorkspace "irc" (ResizableTall 1 (3/100) (13/16) [] ||| Mirror defaultTiled)
+	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [])
+	$ onWorkspace "con" (ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9))
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
