@@ -32,5 +32,7 @@ urxvtd -q -o -f
 
 xrandr --output HDMI2 --auto --pos 0x0 --output HDMI1 --auto --right-of HDMI2
 
+xbindkeys
+
 exec xmonad
 
