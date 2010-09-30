@@ -17,11 +17,9 @@ xrdb -merge .Xresources
 #xsetroot -cursor_name left_ptr
 
 # Set the background color
-      
 xsetroot -solid black 
-       
+
 # Fire up apps
-        
 xscreensaver -no-splash &
 
 export OOO_FORCE_DESKTOP=gnome
@@ -34,5 +32,10 @@ xrandr --output HDMI2 --auto --pos 0x0 --output HDMI1 --auto --right-of HDMI2
 
 xbindkeys
 
+stalonetray &
+nm-applet &
+
 exec xmonad
+
+
 
