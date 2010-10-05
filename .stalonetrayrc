@@ -1,4 +1,4 @@
 background black
-geometry 1x1+1280+0
+geometry 1x1+0+0
 grow_gravity W
 icon_size 16

@@ -290,7 +290,7 @@ myStartupHook = setWMName "LG3D"
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "/home/th/bin/xmobar /home/th/.xmobarrc"
+  xmproc <- spawnPipe "~/bin/xmobar ~/.xmobarrc"
   spawner <- mkSpawner
   xmonad (defaults xmproc spawner)
 
