@@ -35,6 +35,8 @@ xbindkeys
 stalonetray &
 nm-applet &
 
+setxkbmap de nodeadkeys
+
 exec xmonad
 
 
