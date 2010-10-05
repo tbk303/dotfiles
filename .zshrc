@@ -71,7 +71,7 @@ export WORDCHARS='*?_-[]~=&;!#$%^(){}'
 
 # Follow GNU LS_COLORS for completion menus
 zmodload -i zsh/complist
-eval $(dircolors -b /home/th/.dir_colors)
+eval $(dircolors -b ~/.dir_colors)
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
 
