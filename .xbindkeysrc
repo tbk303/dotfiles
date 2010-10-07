@@ -1,2 +1,11 @@
 "exaile -t"
 	Control + Alt + p
+
+"amixer set Master 5%-"
+	XF86AudioLowerVolume
+
+"amixer set Master 5%+"
+  XF86AudioRaiseVolume
+
+"amixer set Master toggle"
+	XF86AudioMute
