@@ -37,6 +37,10 @@ nm-applet &
 
 setxkbmap de nodeadkeys
 
+if dropbox; then
+  dropbox start
+fi
+
 exec xmonad
 
 
