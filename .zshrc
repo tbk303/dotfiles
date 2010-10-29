@@ -625,6 +625,8 @@ alias grep="grep --color=auto"
 
 alias remind="remind -b1 -m"
 
+alias ack=ack-grep
+
 # color diffs for SVN
 function svndiff () {
   if [ "$1" != "" ]; then
