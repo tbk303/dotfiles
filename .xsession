@@ -12,7 +12,8 @@ xrdb -merge .Xresources
 
 # Set up the mouse
 
-#imwheel -k
+imwheel -k
+
 #xmodmap ~/.Xmodmap
 #xsetroot -cursor_name left_ptr
 
