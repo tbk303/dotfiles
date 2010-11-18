@@ -211,7 +211,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
-myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Full)
+myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
 	$ onWorkspace "scm" (ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [])
 	$ onWorkspace "web" (defaultTiled ||| Full)
