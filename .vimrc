@@ -28,6 +28,9 @@ set wildmenu
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
 
+imap <F7> <ESC>:tabp<CR>i
+imap <F8> <ESC>:tabn<CR>i
+
 " Highlight searches
 set hlsearch
 
@@ -54,4 +57,16 @@ endif
 
 let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Smart home key
+function! SmartHome()
+  let s:col = col(".")
+  normal! ^
+  if s:col == col(".")
+    normal! 0
+  endif
+endfunction
+nnoremap <silent> <Home> :call SmartHome()<CR>
+inoremap <silent> <Home> <C-O>:call SmartHome()<CR>
+
 
