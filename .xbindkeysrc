@@ -1,6 +1,9 @@
 "exaile -t"
 	Control + Alt + p
 
+"quodlibet --play-pause"
+	Control + Alt + p
+
 "amixer set Master 5%-"
 	XF86AudioLowerVolume
 
