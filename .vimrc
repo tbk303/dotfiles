@@ -6,8 +6,14 @@ set autoindent
 set expandtab
 
 " Real tab chars for Haskell files.
-autocmd FileType haskell
-  \ set noexpandtab
+"autocmd FileType haskell
+"  \ set noexpandtab
+
+if has('autocmd')
+  au BufEnter *.hamlet setlocal filetype=hamlet
+  au BufEnter *.cassius setlocal filetype=cassius
+  au BufEnter *.julius setlocal filetype=julius
+endif
 
 " Tab spacing.
 set tabstop=2
@@ -42,13 +48,13 @@ set list
 set nowrap
 
 " Some color
-set t_Co=88
+set t_Co=256
 
 let g:inkpot_black_background=1
 colorscheme inkpot
 
-highlight NonText ctermfg=81 guifg=#4a4a59
-highlight SpecialKey ctermfg=81 guifg=#4a4a59
+highlight NonText ctermfg=240 guifg=#4a4a59
+highlight SpecialKey ctermfg=240 guifg=#4a4a59
 
 " Source the vimrc file after saving it
 if has("autocmd")

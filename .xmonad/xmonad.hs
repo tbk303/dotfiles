@@ -70,6 +70,7 @@ myWorkspaces    = ["cod","scm","app","web","irc","msg","sfx","con","tmp"]
 myNormalBorderColor  = "#505050"
 myFocusedBorderColor = "#00ff00"
 
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -213,11 +214,11 @@ defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
 myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
 	$ onWorkspace "scm" (ResizableTall 1 (3/100) (9/16) [])
-	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [])
+	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [] ||| Full)
 	$ onWorkspace "web" (defaultTiled ||| Full)
 	$ onWorkspace "irc" (ResizableTall 1 (3/100) (13/16) [] ||| Mirror defaultTiled)
 	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [])
-	$ onWorkspace "con" (ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9))
+	$ onWorkspace "con" (ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| (ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
@@ -269,7 +270,7 @@ myFocusFollowsMouse = True
 --
 myLogHook xmproc = dynamicLogWithPP $ xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 120
+                        , ppTitle = xmobarColor "green" "" . shorten 140
                         , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
                         }
 
