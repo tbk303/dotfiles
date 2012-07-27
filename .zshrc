@@ -14,7 +14,7 @@
 # BEGIN LOCAL
 export MAILDIR="$HOME/.maildir/"
 
-export BROWSER="firefox"
+export BROWSER="chromium-browser"
 export TERMCMD="urxvtc"
 export EDITOR="vim"
 
@@ -203,7 +203,20 @@ autoload -U colors; colors
 # *just* the gentoo prompt theme. I would investigate, but I'm
 # lazy.
 autoload -U promptinit; promptinit
+
+setopt PROMPT_SUBST
+
+# VCS and PROMPT
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+  '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+ '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
 prompt adam2
+#PS1='%(?..%B%F{red}[%?]%b )%F{6}%~ %f${vcs_info_msg_0_}%# '
+#RPS1='%(!.%B%F{red}.%F{yellow})%n@%m%f%b'
 
 # _gnu_generic is a completion widget that parses the --help output of
 # commands for options. df and feh work fine with it, however options
@@ -280,6 +293,7 @@ precmd() {
 	screen*) print -Pn "\"%n@%m:%~\134"
 	;;
     esac
+  vcs_info
 }
 
 # This sets the window title to the last run command.
@@ -627,6 +641,8 @@ alias remind="remind -b1 -m"
 
 alias ack=ack-grep
 
+alias wuala="wuala -silent"
+
 # color diffs for SVN
 function svndiff () {
   if [ "$1" != "" ]; then
@@ -637,4 +653,6 @@ function svndiff () {
 }
 
 export OOO_FORCE_DESKTOP=gnome
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
