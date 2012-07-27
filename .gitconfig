@@ -1,6 +1,6 @@
 [user]
-	email = me@tbh.name
-	name = Timo B. Hübel
+	email = me@tbk.name
+	name = Timo B. Kranz
 [color]
 	diff = auto
 	status = auto
@@ -30,3 +30,5 @@
 	file-view-hpane-position = 281
 	main-window-view = FileView
 	history-view-vpane-position = 564
+[alias]
+	meld = !/home/tbh/bin/git-meld.pl
