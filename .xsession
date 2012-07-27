@@ -38,9 +38,14 @@ nm-applet &
 
 setxkbmap de nodeadkeys
 
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
 if dropbox; then
   dropbox start
 fi
+
+wuala -silent &
 
 exec xmonad
 
