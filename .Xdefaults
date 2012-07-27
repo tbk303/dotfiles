@@ -4,7 +4,7 @@ URxvt.saveLines:        8192
 URxvt.scrollstyle:      plain
 URxvt.font: xft:Terminus:pixelsize=10
 !URxvt*termName: rxvt
-URxvt.urlLauncher:      firefox
+URxvt.urlLauncher:      chromium-browser
 URxvt.scrollTtyKeypress:true
 URxvt.scrollTtyOutput:  false
 URxvt.scrollWithBuffer: true

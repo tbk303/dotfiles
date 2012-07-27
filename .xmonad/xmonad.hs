@@ -39,21 +39,6 @@ myBorderWidth   = 2
 --
 myModMask       = mod4Mask
 
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
-myNumlockMask   = mod2Mask
-
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
 -- workspace name. The number of workspaces is determined by the length
@@ -74,13 +59,13 @@ myFocusedBorderColor = "#00ff00"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- launch a terminal
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modMask,               xK_p     ), spawnHere sp "exe=`dmenu_path | dmenu -nb \"#000000\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#000000\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
+    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_path | dmenu -nb \"#000000\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#000000\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -218,7 +203,7 @@ myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (Resiz
 	$ onWorkspace "web" (defaultTiled ||| Full)
 	$ onWorkspace "irc" (ResizableTall 1 (3/100) (13/16) [] ||| Mirror defaultTiled)
 	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [])
-	$ onWorkspace "con" (ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| (ResizableTall 1 (3/100) (9/16) [])
+	$ onWorkspace "con" ((ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
@@ -249,7 +234,7 @@ myManageHook = composeAll . concat $
  where
    myFloats      = ["MPlayer", "Gimp"]
    myOtherFloats = ["alsamixer",".", "Firefox Preferences", "Selenium IDE"]
-   webApps       = ["firefox"]
+   webApps       = ["chromium-browser"]
    ircApps       = ["XChat"]
    msgApps       = ["kontact","kmail"]
 
@@ -292,8 +277,7 @@ myStartupHook = setWMName "LG3D"
 --
 main = do
   xmproc <- spawnPipe "~/bin/xmobar ~/.xmobarrc"
-  spawner <- mkSpawner
-  xmonad (defaults xmproc spawner)
+  xmonad (defaults xmproc)
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will 
@@ -301,24 +285,23 @@ main = do
 -- 
 -- No need to modify this.
 --
-defaults xmproc spawner = defaultConfig {
+defaults xmproc = defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
         modMask            = myModMask,
-        numlockMask        = myNumlockMask,
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
 
       -- key bindings
-        keys               = myKeys spawner,
+        keys               = myKeys,
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
         layoutHook         = avoidStruts $ myLayout,
-        manageHook         = manageSpawn spawner <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
+        manageHook         = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
         logHook            = myLogHook xmproc,
         startupHook        = myStartupHook
     }
