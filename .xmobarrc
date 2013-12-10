@@ -8,11 +8,10 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                     , Run Memory ["-L","3000","-H","3500","--low","green","--normal","orange","--high","red"] 10
                     , Run Swap ["-L","80","-H","90","--low","green","--normal","orange","--high","red"] 10
                     , Run Date "%a %b %_d %k:%M" "date" 10
-                    , Run Battery ["-L", "5", "-H", "10","--low","red","--normal","orange","--high","green"] 10
-                    , Run Com "uname" ["-s","-n","-r"] "" 36000
+                    , Run Battery ["-t", "<left>% / <timeleft>", "-L", "5", "-H", "10","--low","red","--normal","orange","--high","green", "--", "-O", "Y", "-o", "-"] 60
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "       <fc=#ff00ff>%uname%</fc> | %StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | <fc=#a0b0ff>%date%</fc> | %EDDH%"
+       , template = "       %StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | <fc=#a0b0ff>%date%</fc> | %EDDH%"
        }

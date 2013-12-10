@@ -201,8 +201,8 @@ myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (Resiz
 	$ onWorkspace "scm" (ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [] ||| Full)
 	$ onWorkspace "web" (defaultTiled ||| Full)
-	$ onWorkspace "irc" (ResizableTall 1 (3/100) (13/16) [] ||| Mirror defaultTiled)
-	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [])
+	$ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
+	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [] ||| Full)
 	$ onWorkspace "con" ((ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
@@ -276,7 +276,7 @@ myStartupHook = setWMName "LG3D"
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "~/bin/xmobar ~/.xmobarrc"
+  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
   xmonad (defaults xmproc)
 
 -- A structure containing your configuration settings, overriding
