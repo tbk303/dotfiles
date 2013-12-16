@@ -2,7 +2,7 @@ URxvt.foreground:       rgb:bb/bb/bb
 URxvt.background:       rgb:00/00/00
 URxvt.saveLines:        8192
 URxvt.scrollstyle:      plain
-URxvt.font: xft:Terminus:pixelsize=10
+URxvt.font: xft:Terminus:pixelsize=14
 !URxvt*termName: rxvt
 URxvt.urlLauncher:      chromium-browser
 URxvt.scrollTtyKeypress:true

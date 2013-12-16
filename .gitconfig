@@ -32,3 +32,5 @@
 	history-view-vpane-position = 564
 [alias]
 	meld = !/home/tbh/bin/git-meld.pl
+[push]
+	default = simple

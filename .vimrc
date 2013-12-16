@@ -51,12 +51,6 @@ set list
 " Do not wrap long lines
 set nowrap
 
-" Some color
-set t_Co=256
-
-let g:inkpot_black_background=1
-colorscheme inkpot
-
 highlight NonText ctermfg=240 guifg=#4a4a59
 highlight SpecialKey ctermfg=240 guifg=#4a4a59
 
@@ -151,4 +145,12 @@ nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
 
 execute pathogen#infect()
+
+" Some color
+" set t_Co=256
+
+let g:inkpot_black_background=1
+colorscheme inkpot
+"set background=dark
+"colorscheme solarized
 

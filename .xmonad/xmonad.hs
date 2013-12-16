@@ -16,9 +16,12 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
 
 import System.IO
 import System.Exit
+
+import Graphics.X11.ExtraTypes.XF86
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -30,7 +33,7 @@ myTerminal      = "urxvtc"
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 2
+myBorderWidth   = 1
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -241,7 +244,7 @@ myManageHook = composeAll . concat $
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -302,6 +305,11 @@ defaults xmproc = defaultConfig {
       -- hooks, layouts
         layoutHook         = avoidStruts $ myLayout,
         manageHook         = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
-        logHook            = myLogHook xmproc,
-        startupHook        = myStartupHook
+        logHook            = myLogHook xmproc
+        --startupHook        = myStartupHook
     }
+    `additionalKeys`
+    [ ((0 , xF86XK_AudioLowerVolume), spawn "amixer -c 1 set Master 2-"),
+      ((0 , xF86XK_AudioRaiseVolume), spawn "amixer -c 1 set Master 2+")
+    ]
+
