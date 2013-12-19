@@ -45,6 +45,10 @@ fi
 
 wuala -silent &
 
+xbacklight '=70'
+
+syndaemon -i 2 -d -t
+
 exec xmonad
 
 
