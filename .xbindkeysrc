@@ -1,7 +1,4 @@
-"exaile -t"
-	Control + Alt + p
-
-"quodlibet --play-pause"
+"cmus-remote -u"
 	Control + Alt + p
 
 "amixer set Master 5%-"
