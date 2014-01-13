@@ -124,6 +124,10 @@ endfunction
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" Window title
+autocmd BufEnter * let &titlestring = expand("%:@")
+set title
+
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
