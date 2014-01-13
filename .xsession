@@ -1,38 +1,45 @@
 #!/bin/bash
 
 # Load resources
-
-#source ~/.profile
-
 xrdb -merge .Xresources
-
-# Set up an icon tray
-
-#trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --transparent true --tint 0x000000 --height 12 &
-
-# Set up the mouse
-
-#imwheel -k
-
-#xmodmap ~/.Xmodmap
-#xsetroot -cursor_name left_ptr
 
 # Set the background color
 xsetroot -solid black 
 
 # Fire up apps
-xscreensaver -no-splash &
 
 eval `ssh-agent`
 
 urxvtd -q -o -f
 
-#xrandr --output eDP1 --auto --pos 0x0 --output HDMI1 --auto --above eDP1
-
 xbindkeys
 
 stalonetray &
+gnome-settings-daemon &
 nm-applet &
+
+# Set up the trackpad
+
+# Disable tapping
+synclient TapButton1=0
+
+# Enable palm detect
+synclient PalmDetect=1
+
+# Enable two finger right click
+synclient TapButton2=3
+
+# Disable right button area click
+synclient RTCornerButton=0
+synclient RBCornerButton=0
+synclient RightButtonAreaLeft=0
+synclient RightButtonAreaTop=0
+
+# Disable right edge scrolling
+synclient VertEdgeScroll=0
+
+# Disable trackpad while typing
+syndaemon -i 2 -d -t
 
 setxkbmap de nodeadkeys
 
@@ -46,8 +53,6 @@ fi
 wuala -silent &
 
 xbacklight '=70'
-
-syndaemon -i 2 -d -t
 
 exec xmonad
 
