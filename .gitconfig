@@ -33,4 +33,4 @@
 [alias]
 	meld = !/home/tbh/bin/git-meld.pl
 [push]
-	default = simple
+	default = matching
