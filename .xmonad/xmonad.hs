@@ -15,6 +15,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 
@@ -305,11 +306,8 @@ defaults xmproc = defaultConfig {
       -- hooks, layouts
         layoutHook         = avoidStruts $ myLayout,
         manageHook         = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
-        logHook            = myLogHook xmproc
+        logHook            = myLogHook xmproc,
+        handleEventHook    = fullscreenEventHook
         --startupHook        = myStartupHook
     }
-    `additionalKeys`
-    [ ((0 , xF86XK_AudioLowerVolume), spawn "amixer -c 1 set Master 2-"),
-      ((0 , xF86XK_AudioRaiseVolume), spawn "amixer -c 1 set Master 2+")
-    ]
 
