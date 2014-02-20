@@ -132,7 +132,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_q     ), restart "xmonad" True)
 
     -- Lock the screen
-    , ((modMask .|. shiftMask, xK_z     ), spawn "xscreensaver-command -lock")
+    , ((modMask .|. shiftMask, xK_z     ), spawn "gnome-screensaver-command -l")
 		-- Shrink/Expand window
     , ((modMask .|. shiftMask, xK_h     ), sendMessage MirrorShrink)
     , ((modMask .|. shiftMask, xK_l     ), sendMessage MirrorExpand)

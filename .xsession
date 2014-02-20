@@ -16,7 +16,8 @@ xbindkeys
 
 stalonetray &
 gnome-settings-daemon &
-nm-applet &
+gnome-session &
+gnome-screensaver &
 
 # Set up the trackpad
 
@@ -53,6 +54,8 @@ fi
 wuala -silent &
 
 xbacklight '=70'
+xset +dpms
+xset dpms 300 300 600
 
 exec xmonad
 

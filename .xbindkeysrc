@@ -1,12 +1,6 @@
 "cmus-remote -u"
   Control + Alt + p
 
-"xbacklight -3"
-  XF86MonBrightnessDown
-
-"xbacklight +3"
-  XF86MonBrightnessUp
-
 "amixer -D pulse sset Master 5%-"
   XF86AudioLowerVolume
 
@@ -15,3 +9,9 @@
 
 "amixer -D pulse sset Master toggle"
   XF86AudioMute
+
+"xbacklight -4"
+  XF86MonBrightnessDown
+
+"xbacklight +4"
+  XF86MonBrightnessUp
