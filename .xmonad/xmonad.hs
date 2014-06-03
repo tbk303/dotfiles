@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_path | dmenu -nb \"#000000\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#000000\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
+    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#000000\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#000000\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")

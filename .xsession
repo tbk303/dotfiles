@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
 # Load resources
 xrdb -merge .Xresources
 
@@ -42,20 +44,18 @@ synclient VertEdgeScroll=0
 # Disable trackpad while typing
 syndaemon -i 2 -d -t
 
-setxkbmap de nodeadkeys
+#setxkbmap de nodeadkeys
 
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
-
-if dropbox; then
-  dropbox start
-fi
 
 wuala -silent &
 
 xbacklight '=70'
 xset +dpms
 xset dpms 300 300 600
+
+dbus-launch nm-applet &
 
 exec xmonad
 

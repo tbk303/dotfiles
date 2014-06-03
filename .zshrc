@@ -66,6 +66,7 @@ alias git='(ssh-add -l > /dev/null) || ssh-add && hub'
 alias be='bundle exec'
 alias rake='bundle exec rake'
 alias rails='bundle exec rails'
+alias chromium-browser='chromium-browser --use-spdy=off'
 
 if [[ -n "${PATH/*$HOME\/bin:*}" ]] ; then
     export PATH="$HOME/bin:$PATH"

@@ -128,6 +128,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 autocmd BufEnter * let &titlestring = expand("%:@")
 set title
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
@@ -147,6 +149,9 @@ let g:multi_cursor_quit_key='<Esc>'
 " Line numbers
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
+
+" Remove trailing whitespace
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 execute pathogen#infect()
 
