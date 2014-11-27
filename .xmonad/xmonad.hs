@@ -17,7 +17,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig(additionalKeysP)
 
 import System.IO
 import System.Exit
@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#000000\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#000000\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
+    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#212121\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#212121\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -133,10 +133,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Lock the screen
     , ((modMask .|. shiftMask, xK_z     ), spawn "gnome-screensaver-command -l")
-		-- Shrink/Expand window
+    -- Shrink/Expand window
     , ((modMask .|. shiftMask, xK_h     ), sendMessage MirrorShrink)
     , ((modMask .|. shiftMask, xK_l     ), sendMessage MirrorExpand)
     ]
+
     ++
 
     --
@@ -207,6 +208,7 @@ myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (Resiz
 	$ onWorkspace "web" (defaultTiled ||| Full)
 	$ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
 	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [] ||| Full)
+	$ onWorkspace "sfx" (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full)
 	$ onWorkspace "con" ((ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| ResizableTall 1 (3/100) (9/16) [])
 	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
@@ -310,4 +312,17 @@ defaults xmproc = defaultConfig {
         handleEventHook    = fullscreenEventHook
         --startupHook        = myStartupHook
     }
+
+    `additionalKeysP`
+
+    -- Backlight
+    [ ("<XF86MonBrightnessUp>"          , spawn "xbacklight +20")
+    , ("<XF86MonBrightnessDown>"        , spawn "xbacklight -20")
+
+    -- Volume
+    , ("<XF86AudioRaiseVolume>"         , spawn "amixer -c 1 set Master 1+ unmute")
+    , ("<XF86AudioLowerVolume>"         , spawn "amixer -c 1 set Master 1- unmute")
+    , ("<XF86AudioMute>"                , spawn "amixer -c 1 set Master 1+ toggle")
+    ]
+
 
