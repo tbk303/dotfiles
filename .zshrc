@@ -29,7 +29,7 @@ ZSH_THEME="tbk"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails ruby rvm)
+plugins=(git git-extras rails ruby rvm bundler)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,11 +62,6 @@ alias remind="remind -b1 -m"
 alias ack=ack-grep
 alias wuala="wuala -silent"
 alias ssh='ssh-add -l || ssh-add && ssh'
-alias git='(ssh-add -l > /dev/null) || ssh-add && hub'
-alias be='bundle exec'
-alias rake='bundle exec rake'
-alias rails='bundle exec rails'
-alias chromium-browser='chromium-browser --use-spdy=off'
 
 if [[ -n "${PATH/*$HOME\/bin:*}" ]] ; then
     export PATH="$HOME/bin:$PATH"
