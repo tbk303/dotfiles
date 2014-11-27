@@ -1,5 +1,5 @@
 URxvt.foreground:       rgb:bb/bb/bb
-URxvt.background:       rgb:00/00/00
+URxvt.background:       rgb:21/21/21
 URxvt.saveLines:        8192
 URxvt.scrollstyle:      plain
 URxvt.font: xft:Terminus:pixelsize=14

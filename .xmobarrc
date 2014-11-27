@@ -1,5 +1,5 @@
 Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
-       , bgColor = "black"
+       , bgColor = "#212121"
        , fgColor = "grey"
        , position = TopW L 100
        , lowerOnStart = True
@@ -13,5 +13,5 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "       %StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | <fc=#a0b0ff>%date%</fc> | %EDDH%"
+       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %battery% | <fc=#a0b0ff>%date%</fc> | %EDDH%"
        }

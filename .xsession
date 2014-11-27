@@ -6,20 +6,23 @@
 xrdb -merge .Xresources
 
 # Set the background color
-xsetroot -solid black 
+xsetroot -solid grey13
 
 # Fire up apps
 
 eval `ssh-agent`
 
-urxvtd -q -o -f
+eval `dbus-launch`
 
+urxvtd -q -o -f 
 xbindkeys
 
-stalonetray &
-gnome-settings-daemon &
+#stalonetray &
+unity-settings-daemon &
 gnome-session &
 gnome-screensaver &
+
+#nm-applet &
 
 # Set up the trackpad
 
@@ -30,7 +33,7 @@ synclient TapButton1=0
 synclient PalmDetect=1
 
 # Enable two finger right click
-synclient TapButton2=3
+synclient TapButton2=0
 
 # Disable right button area click
 synclient RTCornerButton=0
@@ -44,7 +47,7 @@ synclient VertEdgeScroll=0
 # Disable trackpad while typing
 syndaemon -i 2 -d -t
 
-#setxkbmap de nodeadkeys
+setxkbmap de nodeadkeys
 
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
@@ -55,7 +58,7 @@ xbacklight '=70'
 xset +dpms
 xset dpms 300 300 600
 
-dbus-launch nm-applet &
+export LIBGL_DRI3_DISABLE=1 # Fix chrome/intel bug
 
 exec xmonad
 
