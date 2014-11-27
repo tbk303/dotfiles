@@ -132,8 +132,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|vagrant)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'dir':  '\data$|\v[\/]\.(git|hg|svn|vagrant|rsync_cache)$',
+  \ 'file': '\v\.(exe|so|dll|pdf|png|jpg)$',
   \ }
 
 let g:gitgutter_sign_column_always = 1
@@ -162,4 +162,13 @@ let g:inkpot_black_background=1
 colorscheme inkpot
 "set background=dark
 "colorscheme solarized
+"colorscheme railscasts
+
+" Incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Avoid flashing terminal output in :Ag
+set shellpipe=>
 
