@@ -47,18 +47,20 @@ synclient VertEdgeScroll=0
 # Disable trackpad while typing
 syndaemon -i 2 -d -t
 
+#imwheel -k
+
 setxkbmap de nodeadkeys
 
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
-wuala -silent &
+#wuala -silent &
 
 xbacklight '=70'
 xset +dpms
 xset dpms 300 300 600
 
-export LIBGL_DRI3_DISABLE=1 # Fix chrome/intel bug
+#export LIBGL_DRI3_DISABLE=1 # Fix chrome/intel bug
 
 exec xmonad
 

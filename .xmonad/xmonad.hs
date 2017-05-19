@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#212121\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#212121\" -fn \"-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*\"` && eval \"exec $exe\"")
+    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#212121\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#212121\" -fn \"Terminus:style=bold:pixelsize=14\"` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -203,14 +203,14 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
 myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
-	$ onWorkspace "scm" (ResizableTall 1 (3/100) (9/16) [])
-	$ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [] ||| Full)
-	$ onWorkspace "web" (defaultTiled ||| Full)
-	$ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
-	$ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [] ||| Full)
-	$ onWorkspace "sfx" (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full)
-	$ onWorkspace "con" ((ThreeColMid 2 (3/100) (4/9) ||| ThreeCol 2 (3/100) (4/9)) ||| ResizableTall 1 (3/100) (9/16) [])
-	$ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
+  $ onWorkspace "scm" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
+  $ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [] ||| Full)
+  $ onWorkspace "web" (defaultTiled ||| Full)
+  $ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
+  $ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [] ||| Full)
+  $ onWorkspace "sfx" (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full)
+  $ onWorkspace "con" ((ThreeColMid 2 (3/100) (3/9) ||| ThreeCol 2 (3/100) (3/9)) ||| ResizableTall 1 (3/100) (9/16) [])
+  $ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -238,7 +238,7 @@ myManageHook = composeAll . concat $
     , [ className   =? c --> doF (W.shift "msg") | c <- msgApps]
     ]
  where
-   myFloats      = ["MPlayer", "Gimp"]
+   myFloats      = ["MPlayer"]
    myOtherFloats = ["alsamixer",".", "Firefox Preferences", "Selenium IDE"]
    webApps       = ["chromium-browser"]
    ircApps       = ["XChat"]
@@ -316,13 +316,14 @@ defaults xmproc = defaultConfig {
     `additionalKeysP`
 
     -- Backlight
-    [ ("<XF86MonBrightnessUp>"          , spawn "xbacklight +20")
-    , ("<XF86MonBrightnessDown>"        , spawn "xbacklight -20")
+    [ ("<XF86MonBrightnessUp>"          , spawn "xbacklight +10")
+    , ("<XF86MonBrightnessDown>"        , spawn "xbacklight -10")
 
     -- Volume
     , ("<XF86AudioRaiseVolume>"         , spawn "amixer -c 1 set Master 1+ unmute")
     , ("<XF86AudioLowerVolume>"         , spawn "amixer -c 1 set Master 1- unmute")
-    , ("<XF86AudioMute>"                , spawn "amixer -c 1 set Master 1+ toggle")
+    , ("<XF86AudioMute>"                , spawn "amixer -D pulse set Master 1+ toggle")
+    --, ("<XF86AudioPlay>"                , spawn "cmus-remote -u")
     ]
 
 

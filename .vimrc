@@ -14,6 +14,8 @@ if has('autocmd')
   au BufEnter *.cassius setlocal filetype=cassius
   au BufEnter *.julius setlocal filetype=julius
   au BufEnter *.prawn setlocal filetype=ruby
+  " add jbuilder syntax highlighting
+  au BufNewFile,BufRead *.json.jbuilder set ft=ruby
 endif
 
 " Tab spacing.
@@ -25,6 +27,7 @@ set softtabstop=2
 set smarttab
 
 " Show line numbers.
+set relativenumber 
 set number
 
 " Proper autocomplete when opening files
@@ -128,11 +131,11 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 autocmd BufEnter * let &titlestring = expand("%:@")
 set title
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/data
 
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\data$|\v[\/]\.(git|hg|svn|vagrant|rsync_cache)$',
+  \ 'dir':  '\data$|\v[\/]\.(git|hg|svn|node_modules|vagrant|rsync_cache)$',
   \ 'file': '\v\.(exe|so|dll|pdf|png|jpg)$',
   \ }
 
@@ -168,6 +171,9 @@ colorscheme inkpot
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+" Disable Ex mode
+nnoremap Q <nop>
 
 " Avoid flashing terminal output in :Ag
 set shellpipe=>

@@ -53,6 +53,11 @@ export TERMCMD="urxvtc"
 export EDITOR="vim"
 export OOO_FORCE_DESKTOP=gnome
 
+# Fix Java apps in xmonad
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export ANDROID_HOME="/home/tbk/Android/Sdk"
+
 # Aliases
 alias ll="ls -lh --color=auto"
 alias la="ls -lha --color=auto"
@@ -75,11 +80,19 @@ if [[ -n "${PATH/*$HOME\/.cabal\/bin:*}" ]] ; then
     export PATH="$HOME/.cabal/bin:$PATH"
 fi
 
+# Load autojump
+. /usr/share/autojump/autojump.sh
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+PATH=$PATH:$HOME/.rvm/bin:/opt/android-studio/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:/home/tbk/.local/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
 
+export NVM_DIR="/home/tbk/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+alias nvm-enable=". $NVM_DIR/nvm.sh"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+alias dc="docker-compose"
