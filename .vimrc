@@ -35,14 +35,11 @@ set wildmode=longest,list,full
 set wildmenu
 
 " Tabbing
-map <F7> :tabp<CR>
-map <F8> :tabn<CR>
+map <F8> :tabp<CR>
+map <F9> :tabn<CR>
 
-imap <F7> <ESC>:tabp<CR>
-imap <F8> <ESC>:tabn<CR>
-
-" Explorer
-map <F9> :Te<CR>
+imap <F8> <ESC>:tabp<CR>
+imap <F9> <ESC>:tabn<CR>
 
 " Highlight searches
 set hlsearch
@@ -56,11 +53,6 @@ set nowrap
 
 highlight NonText ctermfg=240 guifg=#4a4a59
 highlight SpecialKey ctermfg=240 guifg=#4a4a59
-
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd BufWritePost .vimrc source $MYVIMRC
-endif
 
 let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
@@ -135,11 +127,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/data
 
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\data$|\v[\/]\.(git|hg|svn|node_modules|vagrant|rsync_cache)$',
+  \ 'dir':  'data$\|public/packs$\|node_modules\|\v[\/]\.(git|hg|svn|vagrant|rsync_cache)$',
   \ 'file': '\v\.(exe|so|dll|pdf|png|jpg)$',
   \ }
 
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 let g:gitgutter_eager = 0
 
 " Multi cursor
@@ -155,6 +147,15 @@ nnoremap <F4> :NumbersOnOff<CR>
 
 " Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+let g:ackprg = 'ag --vimgrep --smart-case --column'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+
+map <C-F> :Ack!<space>
+vnoremap <C-F> y:Ack! "<C-r>=fnameescape(@")<CR>"
 
 execute pathogen#infect()
 
@@ -177,4 +178,16 @@ nnoremap Q <nop>
 
 " Avoid flashing terminal output in :Ag
 set shellpipe=>
+
+let g:syntastic_ruby_checkers = ['rubocop -p', 'mri']
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 

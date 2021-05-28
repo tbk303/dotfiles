@@ -12,7 +12,6 @@ import XMonad.Actions.SpawnOn
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
@@ -32,7 +31,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "gnome-terminal"
+myTerminal      = "urxvtc"
 
 -- Width of the window border in pixels.
 --
@@ -54,7 +53,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["cod","scm","app","web","irc","msg","sfx","vfx","con", "tmp"]
+myWorkspaces    = ["cod","scm","app","web","irc","msg","sfx","con","tmp"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -71,8 +70,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    --, ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#212121\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#212121\" -fn \"Terminus:style=bold:pixelsize=14\"` && eval \"exec $exe\"")
-    , ((modMask,               xK_p     ), spawn "rofi -show run")
+    , ((modMask,               xK_p     ), spawnHere "exe=`dmenu_run -nb \"#212121\" -nf \"#dddddd\" -sb \"#00ffff\" -sf \"#212121\" -fn \"Terminus:style=bold:pixelsize=14\"` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -157,7 +155,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        | (key, sc) <- zip [xK_e, xK_w, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
@@ -207,14 +205,13 @@ defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
 myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
   $ onWorkspace "scm" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
-  $ onWorkspace "app" (smartBorders (ResizableTall 1 (3/100) (10/16) [] ||| Full))
+  $ onWorkspace "app" (ResizableTall 1 (3/100) (10/16) [] ||| Full)
   $ onWorkspace "web" (defaultTiled ||| Full)
   $ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
-  $ onWorkspace "msg" (smartBorders (ResizableTall 1 (3/100) (7/16) [] ||| Full))
-  $ onWorkspace "sfx" (smartBorders (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full))
-  $ onWorkspace "vfx" (smartBorders (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full))
-  $ onWorkspace "con" (smartBorders ((ThreeColMid 2 (3/100) (3/9) ||| ThreeCol 2 (3/100) (3/9)) ||| ResizableTall 1 (3/100) (9/16) []))
-  $ onWorkspace "tmp" (smartBorders (defaultTiled ||| Mirror defaultTiled ||| Full)) Full
+  $ onWorkspace "msg" (ResizableTall 1 (3/100) (7/16) [] ||| Full)
+  $ onWorkspace "sfx" (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full)
+  $ onWorkspace "con" ((ThreeColMid 2 (3/100) (3/9) ||| ThreeCol 2 (3/100) (3/9)) ||| ResizableTall 1 (3/100) (9/16) [])
+  $ onWorkspace "tmp" (defaultTiled ||| Mirror defaultTiled ||| Full) Full
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -240,10 +237,9 @@ myManageHook = composeAll . concat $
     , [ className   =? c --> doF (W.shift "web") | c <- webApps]
     , [ className   =? c --> doF (W.shift "irc") | c <- ircApps]
     , [ className   =? c --> doF (W.shift "msg") | c <- msgApps]
-    , [ className =? "Do" --> doIgnore ]
     ]
  where
-   myFloats      = ["MPlayer", "Calculator", "gnome-calculator"]
+   myFloats      = ["MPlayer"]
    myOtherFloats = ["alsamixer",".", "Firefox Preferences", "Selenium IDE"]
    webApps       = ["chromium-browser"]
    ircApps       = ["XChat"]
@@ -264,6 +260,11 @@ myFocusFollowsMouse = False
 --
 -- > logHook = dynamicLogDzen
 --
+myLogHook xmproc = dynamicLogWithPP $ xmobarPP
+                        { ppOutput = hPutStrLn xmproc
+                        , ppTitle = xmobarColor "green" "" . shorten 140
+                        , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
+                        }
 
 
 ------------------------------------------------------------------------
@@ -282,7 +283,8 @@ myStartupHook = setWMName "LG3D"
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmonad $ defaults
+  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
+  xmonad (defaults xmproc)
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will 
@@ -290,7 +292,7 @@ main = do
 -- 
 -- No need to modify this.
 --
-defaults = gnomeConfig {
+defaults xmproc = defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -306,27 +308,23 @@ defaults = gnomeConfig {
 
       -- hooks, layouts
         layoutHook         = avoidStruts $ myLayout,
-        manageHook         = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook gnomeConfig,
+        manageHook         = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
+        logHook            = myLogHook xmproc,
         handleEventHook    = fullscreenEventHook
         --startupHook        = myStartupHook
     }
 
     `additionalKeysP`
 
-    [ ("M-S-q", spawn "gnome-session-quit")
-    , ("M-0",   windows $ W.greedyView "tmp")  -- workspace 0
-    , ("M-S-0", (windows $ W.shift "tmp") >> (windows $W.greedyView "tmp")) -- shift window to WS 0
-    ]
-
     -- Backlight
-    --[ ("<XF86MonBrightnessUp>"          , spawn "xbacklight +10")
-    --, ("<XF86MonBrightnessDown>"        , spawn "xbacklight -10")
+    [ ("<XF86MonBrightnessUp>"          , spawn "xbacklight +10")
+    , ("<XF86MonBrightnessDown>"        , spawn "xbacklight -10")
 
     -- Volume
-    --, ("<XF86AudioRaiseVolume>"         , spawn "amixer -c 1 set Master 1+ unmute")
-    --, ("<XF86AudioLowerVolume>"         , spawn "amixer -c 1 set Master 1- unmute")
-    --, ("<XF86AudioMute>"                , spawn "amixer -D pulse set Master 1+ toggle")
+    , ("<XF86AudioRaiseVolume>"         , spawn "amixer -c 1 set Master 1+ unmute")
+    , ("<XF86AudioLowerVolume>"         , spawn "amixer -c 1 set Master 1- unmute")
+    , ("<XF86AudioMute>"                , spawn "amixer -D pulse set Master 1+ toggle")
     --, ("<XF86AudioPlay>"                , spawn "cmus-remote -u")
-    --]
+    ]
 
 

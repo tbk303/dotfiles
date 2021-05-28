@@ -1,0 +1,34 @@
+#!/bin/bash
+
+export XDG_CURRENT_DESKTOP=Unity
+
+# Load resources
+#xrdb -merge .Xresources
+
+# Set the background color
+xsetroot -solid grey13
+
+# Fire up apps
+
+eval `ssh-agent`
+
+eval `dbus-launch`
+
+urxvtd -q -o -f 
+xbindkeys
+
+gnome-session &
+gnome-settings-daemon &
+#light-locker --lock-on-lid --lock-on-suspend &
+
+synclient PalmDetect=1
+synclient TapButton1=0
+syndaemon -i 2 -d -t
+
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+xbacklight '=70'
+xset +dpms
+xset dpms 300 300 600
+
