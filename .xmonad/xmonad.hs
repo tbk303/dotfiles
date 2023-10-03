@@ -32,7 +32,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "gnome-terminal"
+myTerminal      = "alacritty"
 
 -- Width of the window border in pixels.
 --
@@ -54,7 +54,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["cod","scm","app","web","irc","msg","sfx","vfx","con", "tmp"]
+myWorkspaces    = ["cod","scm","dev","web","irc","bus","vfx","con1","con2", "con3"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -157,7 +157,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0,1,2]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
@@ -205,16 +205,16 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
-myLayout = onWorkspace "cod" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
-  $ onWorkspace "scm" (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)
-  $ onWorkspace "app" (smartBorders (ResizableTall 1 (3/100) (10/16) [] ||| Full))
-  $ onWorkspace "web" (defaultTiled ||| Full)
-  $ onWorkspace "irc" (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled)
-  $ onWorkspace "msg" (smartBorders (ResizableTall 1 (3/100) (7/16) [] ||| Full))
-  $ onWorkspace "sfx" (smartBorders (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full))
+myLayout = onWorkspace "cod" (smartBorders (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full))
+  $ onWorkspace "scm" (smartBorders (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full))
+  $ onWorkspace "dev"  (smartBorders (ResizableTall 1 (3/100) (10/16) [] ||| Full))
+  $ onWorkspace "web" (smartBorders (defaultTiled ||| Full))
+  $ onWorkspace "irc"  (smartBorders (ResizableTall 1 (3/100) (14/16) [] ||| Mirror defaultTiled))
+  $ onWorkspace "bus" (smartBorders (ResizableTall 1 (3/100) (7/16) [] ||| Full))
   $ onWorkspace "vfx" (smartBorders (ResizableTall 1 (3/100) (8/16) [] ||| Mirror defaultTiled ||| Full))
-  $ onWorkspace "con" (smartBorders ((ThreeColMid 2 (3/100) (3/9) ||| ThreeCol 2 (3/100) (3/9)) ||| ResizableTall 1 (3/100) (9/16) []))
-  $ onWorkspace "tmp" (smartBorders (defaultTiled ||| Mirror defaultTiled ||| Full)) Full
+  $ onWorkspace "con1" (smartBorders (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full))
+  $ onWorkspace "con2" (smartBorders (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full))
+  $ onWorkspace "con3" (smartBorders (ResizableTall 1 (3/100) (1/2) [] ||| Mirror (ResizableTall 2 (3/100) (3/4) []) ||| Full)) defaultTiled
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -314,8 +314,8 @@ defaults = gnomeConfig {
     `additionalKeysP`
 
     [ ("M-S-q", spawn "gnome-session-quit")
-    , ("M-0",   windows $ W.greedyView "tmp")  -- workspace 0
-    , ("M-S-0", (windows $ W.shift "tmp") >> (windows $W.greedyView "tmp")) -- shift window to WS 0
+    , ("M-0",   windows $ W.greedyView "con3")  -- workspace 0
+    , ("M-S-0", windows $ W.shift "con3") -- shift window to WS 0
     ]
 
     -- Backlight

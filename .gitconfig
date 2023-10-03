@@ -1,6 +1,7 @@
 [user]
 	email = me@tbk.name
 	name = Timo B. Kranz
+	signingkey = 29F87AA8A347F924
 [color]
 	diff = auto
 	status = auto
@@ -34,3 +35,8 @@
 	meld = !/home/tbh/bin/git-meld.pl
 [push]
 	default = matching
+[pull]
+	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
